@@ -1,10 +1,22 @@
-var oracion;
-oracion = prompt("Ingrese frase u oracion para comprobar si es palindromo:", "");
-var cont = oracion.length;
-var pal = oracion.charAt(cont - 1);
-for (var i = cont - 2; i >= 0; i--)
-    pal = pal + oracion.charAt(i);
-if (oracion == pal)
-    document.write(true + "");
-else
-    document.write(false + "");
+var arraytexto = [];
+var primero;
+var segundo;
+var mult;
+var mayor = 0;
+function añadir() {
+    var palbras = document.getElementById('texto').value.split(" ");
+    arraytexto = arraytexto.concat(palbras);
+    document.getElementById('texto').value = "";
+}
+function mostrar() {
+    for (var j = 0; j <= arraytexto.length - 1; j++) {
+        if (j + 1 <= arraytexto.length - 1) {
+            primero = arraytexto[j];
+            segundo = arraytexto[j + 1];
+            mult = primero * segundo;
+        }
+        if (mult > mayor)
+            mayor = mult;
+    }
+    document.write(mayor);
+}
