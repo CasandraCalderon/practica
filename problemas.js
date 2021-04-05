@@ -1,38 +1,49 @@
-var arraytexto = [];
-var nombre;
-var nombre2;
-var a;
-var b;
+var direccion;
+var numero = "";
 var cont = 0;
-function añadir() {
-    var palbras = document.getElementById('texto').value.split(" ");
-    arraytexto = arraytexto.concat(palbras);
-    document.getElementById('texto').value = "";
-}
-function mostrar() {
-    arraytexto.sort();
-    for (var i = 0; i < arraytexto.length - 1; i++) {
-        cont = 0;
-        nombre = arraytexto[i];
-        a = nombre.charAt(0);
-        for (var j = 0; j < arraytexto.length - 1; j++) {
-            nombre2 = arraytexto[j];
-            b = nombre2.charAt(0);
-            if (a == b) {
+var estado = 0;
+direccion = prompt("Inserte direccion IPv4:", "");
+for (var i = 0; i <= direccion.length; i++) {
+    if (isNaN(direccion.charAt(i)) == false && direccion.charAt(i) != '.') {
+        numero = numero + direccion.charAt(i);
+    }
+    else {
+        if (numero != "") {
+            if (direccion.charAt(i) == "." || direccion.charAt(i) == " ") {
                 cont++;
+                if (cont < 5) {
+                    if (numero > 255) {
+                        estado = 1;
+                        break;
+                    }
+                    else {
+                        numero = "";
+                    }
+                }
+                else {
+                    estado = 1;
+                    break;
+                }
             }
         }
-        if (cont > 1) {
-            if (cont % 2 == 0) {
-                document.write(2 + "");
-            }
-            else {
-                document.write(1 + "");
-            }
+        else {
+            estado = 1;
+            break;
+        }
+        if (cont == 4) {
+            estado = 1;
             break;
         }
     }
-    if (cont == 1) {
-        document.write(0 + "");
+}
+cont++;
+if (numero != '') {
+    if (numero <= 255 && cont == 4) {
+        document.write(true + "");
     }
+    else
+        document.write(false + "");
+}
+else {
+    document.write(false + "");
 }
