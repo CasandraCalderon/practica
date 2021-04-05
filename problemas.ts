@@ -1,24 +1,27 @@
-var arraytexto = [];
-var primero;
-var segundo;
-var mult;
-var mayor: any=0;
+var arraytexto: any[] = [];
+var a;
+var nuevas: number=0;
 export {};
 function añadir() {
     let palbras = (<HTMLInputElement>document.getElementById('texto')).value.split(" ");
     arraytexto = arraytexto.concat(palbras);
     (<HTMLInputElement>document.getElementById('texto')).value = "";
   }
-  
-  function mostrar() {
-    for (var j=0; j<=arraytexto.length-1; j++){
-        if(j+1<=arraytexto.length-1){
-            primero=arraytexto[j];
-            segundo=arraytexto[j+1];
-            mult=primero*segundo;
+export {};
+function mostrar() {
+    arraytexto.sort(function(a, b) {
+        return a - b;
+    });
+    for (var i=0; i<arraytexto.length-1; i++){
+        if(i<arraytexto.length){
+            a=arraytexto[i];
+            while (a<arraytexto[i+1]-1){
+                nuevas++;
+                a++;
+            }
+            a=0;
         }
-        if (mult>mayor)
-            mayor=mult;
+    
     }
-    document.write(mayor);
-  }
+    document.write(nuevas.toString());
+}
